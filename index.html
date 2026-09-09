@@ -40,6 +40,24 @@
     details summary { cursor:pointer; color:var(--accent); }
     pre { overflow:auto; padding:10px; background:#f0f0eb; border:1px solid var(--line); border-radius:5px; }
     @media (min-width:700px) { main { padding-top:20px; } }
+
+    /* Recipes collapsed by default */
+    .recipe .recipe-meta,
+    .recipe .recipe-body {
+      display: none;
+    }
+
+    /* Expanded recipe */
+    .recipe.expanded .recipe-meta,
+    .recipe.expanded .recipe-body {
+      display: block;
+    }
+
+    /* Make heading look clickable */
+    .recipe > h2 {
+      cursor: pointer;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -2169,6 +2187,13 @@
       clear.addEventListener('click', () => { search.value = ''; activeTag = ''; render(); search.focus(); });
       render();
     })();
+  </script>
+  <script>
+    document.querySelectorAll('.recipe > h2').forEach(h2 => {
+      h2.addEventListener('click', () => {
+        h2.parentElement.classList.toggle('expanded');
+      });
+    });
   </script>
 </body>
 </html>
